@@ -155,24 +155,31 @@ void block_line()
             break;
         }
     }
-    if (vga_line < 22 + 2 + 2*16 + 2*16 && (block_copying<128))
+    if (block_copying<128)
     {
         int ix = SCREEN_W-24 - 16*2 + 2;
-        int final_ix = ix + 32; // final image coordinate, not inclusive
-        int x = 0;
-        int y = vga_line - (22 + 2 + 2*16 + 2*16);
-        while (ix < final_ix)
+        if (vga_line < 22 + 2*16)
         {
-            uint32_t color, length;
-            drill_down(&color, &length, palette_block_data[128+block_index], x, y, 32);
-            x += length;
-            int next_ix = ix + length;
-            do
-                draw_buffer[ix++] = color & 65535; // need to add bg sometime
-            while (ix < next_ix);
+            int final_ix = ix + 32; // final image coordinate, not inclusive
+            int x = 0;
+            int y = vga_line - (22);
+            while (ix < final_ix)
+            {
+                uint32_t color, length;
+                drill_down(&color, &length, palette_block_data[128+block_copying], x, y, 32);
+                x += length;
+                int next_ix = ix + length;
+                do
+                    draw_buffer[ix++] = color & 65535; // need to add bg sometime
+                while (ix < next_ix);
+            }
+        }
+        else if (vga_line/2 == (22 + 2*16)/2)
+        {
+            memset(&draw_buffer[ix], BG_COLOR, 32*2);
         }
     }
-    else if (vga_line >= 22 + NUMBER_LINES*10 - 64)
+    if (vga_line >= 22 + NUMBER_LINES*10 - 64)
     {
         int ix = SCREEN_W-30 - 16*2*2;
         int final_ix = ix + 64; // final image coordinate, not inclusive

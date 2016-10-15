@@ -119,13 +119,13 @@ void palette_line()
             if (palette_copying < 1<<31)
                 font_render_line_doubled((const uint8_t *)"X:  \"     \"", 16+2*9, internal_line, 65535, 0);
             else
-                font_render_line_doubled((const uint8_t *)"X:load color", 16+2*9, internal_line, 65535, 0);
+                font_render_line_doubled((const uint8_t *)"X:copy color", 16+2*9, internal_line, 65535, 0);
             break;
         case 5:
             if (palette_copying < 1<<31)
                 font_render_line_doubled((const uint8_t *)"B:  \"     \"", 16+2*9, internal_line, 65535, 0);
             else
-                font_render_line_doubled((const uint8_t *)"B:copy", 16+2*9, internal_line, 65535, 0);
+                font_render_line_doubled((const uint8_t *)"B:load color", 16+2*9, internal_line, 65535, 0);
             break;
         case 6:
             if (palette_copying < 1<<31)
@@ -304,7 +304,7 @@ void palette_controls()
     if (make_wait)
         gamepad_press_wait = GAMEPAD_PRESS_WAIT;
 
-    if (GAMEPAD_PRESS(0, B))
+    if (GAMEPAD_PRESS(0, X))
     {
         // copy or uncopy
         if (palette_copying < 1<<31)
@@ -319,7 +319,7 @@ void palette_controls()
         // save
         save_or_load = 1;
     }
-    else if (GAMEPAD_PRESS(0, X))
+    else if (GAMEPAD_PRESS(0, B))
     {
         // load
         save_or_load = 2;

@@ -122,9 +122,6 @@ void game_frame()
         --gamepad_press_wait;
 }
 
-void graph_frame() 
-{
-}
 
 void graph_line() 
 {

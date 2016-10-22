@@ -359,6 +359,7 @@ FileError io_load_block(unsigned int i)
             return ReadError; 
         else if (bytes_get != 4*128)
             return MissingDataError;
+        view_block = palette_block_data[129];
         return NoError;
     }
     // i < 128

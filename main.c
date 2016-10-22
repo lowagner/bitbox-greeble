@@ -199,7 +199,7 @@ void game_switch(VisualMode new_visual_mode)
     switch (new_visual_mode)
     {
     case View:
-        message("got chip %d, %d, %d, %d\n", view_block&255, (view_block>>8)&255, (view_block>>16)&255, view_block>>24);
+        message("got block %d, %d, %d, %d\n", view_block&255, (view_block>>8)&255, (view_block>>16)&255, view_block>>24);
         chip_play_init(0);
         break;
     default:

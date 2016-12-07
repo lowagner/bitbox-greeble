@@ -9,7 +9,7 @@ GAME_C_FILES = font.c name.c view.c io.c block.c palette.c \
     chiptune.c verse.c instrument.c anthem.c save.c main.c
 GAME_H_FILES = font.h name.h view.h io.h block.h palette.h \
     chiptune.h verse.h instrument.h anthem.h save.h common.h 
-GAME_C_OPTS += -DVGAMODE_320
+DEFINES += VGA_MODE=320
 
 # see this file for options
 include $(BITBOX)/kernel/bitbox.mk

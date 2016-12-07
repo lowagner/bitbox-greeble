@@ -12,7 +12,7 @@ GAME_H_FILES = font.h name.h view.h io.h block.h palette.h \
 GAME_C_OPTS += -DVGAMODE_320
 
 # see this file for options
-include $(BITBOX)/lib/bitbox.mk
+include $(BITBOX)/kernel/bitbox.mk
 
 destroy:
 	rm -f RECENT16.TXT *.GBL

@@ -82,7 +82,6 @@ void game_init()
 
 void game_frame()
 {
-    kbd_emulate_gamepad();
     switch (visual_mode)
     {
     case EditPalette:
@@ -120,10 +119,6 @@ void game_frame()
 
     if (gamepad_press_wait)
         --gamepad_press_wait;
-}
-
-void graph_frame() 
-{
 }
 
 void graph_line() 

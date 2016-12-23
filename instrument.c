@@ -11,6 +11,13 @@
 #include <stdlib.h> // rand
 #include <string.h> // memset
 
+const uint8_t hex[64] = { 
+    '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f', // standard hex
+    'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', // up to 32
+    'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', // up to 48
+    'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 138, 255  // up to 64
+};
+
 const uint8_t note_name[12][2] = {
     { 'C', ' ' }, 
     { 'C', '#' }, 
@@ -1199,8 +1206,7 @@ void instrument_controls()
             instrument_note = (instrument_note + 1)%24;
             reset_player(verse_player);
             chip_player[verse_player].octave = instrument[instrument_i].octave;
-            chip_player[verse_player].instrument = instrument_i;
-            chip_note(verse_player, instrument_note, 240); 
+            chip_note(verse_player, instrument_i, instrument_note, 240); 
         }
         
         if (GAMEPAD_PRESS(0, B))
@@ -1211,8 +1217,7 @@ void instrument_controls()
                 instrument_note = 23;
             reset_player(verse_player);
             chip_player[verse_player].octave = instrument[instrument_i].octave;
-            chip_player[verse_player].instrument = instrument_i;
-            chip_note(verse_player, instrument_note, 240); 
+            chip_note(verse_player, instrument_i, instrument_note, 240); 
         }
     }
 
